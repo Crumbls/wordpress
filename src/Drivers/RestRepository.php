@@ -78,9 +78,8 @@ class RestRepository implements WordPressDriver
 		return $this->execute('comments', ['query' => ['per_page' => $perPage]]);
 	}
 
-	public function getPages(int $perPage = 10): array
-	{
-		return $this->execute('pages', ['query' => ['per_page' => 100]]);
+	public function getPages(int $perPage = 10): array {
+		return $this->execute('pages', ['query' => ['per_page' => $perPage]]);
 	}
 
 	public function getUsers(int $perPage = 10): array {
@@ -184,6 +183,7 @@ class RestRepository implements WordPressDriver
 				$endpoint,
 				md5(json_encode($arguments))
 			]);
+			echo $cacheKey;
 			return \Cache::remember($cacheKey, 60 * 60, function() use ($endpoint, $arguments, $exec) {
 				return $exec($endpoint, $arguments);
 			});
@@ -563,5 +563,10 @@ class RestRepository implements WordPressDriver
 	public function getMedia(int $mediaId): array|null
 	{
 		// TODO: Implement getMedia() method.
+	}
+
+	public function getPage(int $pageId): array|null
+	{
+		return $this->execute('pages/'.$pageId);
 	}
 }

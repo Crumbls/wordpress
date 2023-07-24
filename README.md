@@ -29,8 +29,37 @@ Add the wordpress service to your services.php configuration file.
 ````
 Now inside of your command ( yes it can be used elsewhere, but this is a tool to help aid in migration, not rendering. )
 ```
-$wp = app('wordpress');
+$wp = app('wordpress')->driver('wp-json');
 ```
 
-This returns an instance of Crumbls\Services\WordPress, which will let you execute basic wp-json pulls.  I'm adding parameters 
+This returns an instance of Crumbls\Services\WordPress, which will let you execute basic wp-json pulls.  Although we don't
+like using this inside of a controller since it's to assist with migrations, here's an example of how to do it.
+
+```
+<?php
+
+namespace App\Http\Controllers\Pages;
+
+use App\Http\Controllers\Controller;
+
+class WordPressPageController extends Controller {
+	public function __invoke() {
+		$wp = app('wordpress')->driver('wp-json');
+		$page = $wp->getPage(589);
+
+		abort_if(!$page, 404);
+
+		$routeName = 'wordpress.'.$page['slug'];
+		abort_if(!$routeName, 404);
+
+		$viewName = strtolower($routeName);
+		$viewName = preg_replace("/[^a-z0-9\.-]/", '', $viewName);
+		$viewName = trim($viewName, '.');
+		abort_if(!\View::exists($viewName), 404);
+		return view($viewName, ['page' => $page]);
+	}
+}
+```
+
+I'm adding parameters 
 as time allows.  If you have a feature request, just email me.

@@ -28,6 +28,7 @@ interface WordPressDriver
 	 * Pages
 	 */
 	public function getPages(int $perPage = 10) : array;
+	public function getPage(int $pageId) : array|null;
 	public function getPageRevisions(int $pageId) : array|null;
 	public function getPageRevision(int $pageId, int $revisionId) : array|null;
 	public function getPageAutosaves(int $pageId) : array|null;

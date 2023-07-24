@@ -44,7 +44,15 @@ use App\Http\Controllers\Controller;
 
 class WordPressPageController extends Controller {
 	public function __invoke() {
+		/**
+		 * Method A
+		 */
 		$wp = app('wordpress')->driver('wp-json');
+		/**
+		 * Method B
+		 */
+		$wp = \WordPress::driver('wp-json');
+
 		$page = $wp->getPage(589);
 
 		abort_if(!$page, 404);

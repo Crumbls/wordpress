@@ -2,7 +2,7 @@
 
 ### This package is in very early development and shouldn't be used.   More than anything, it's a POC to demonstrate a specific programming pattern.
 ### It's only available to collect data on what is left to be completed between a few users. There are almost no comments.
-### Regular changes will break this as it's just a proof of concept.
+### Regular changes will be breaking.
 
 The goal of this package is to provide an abstract factory pattern via a manager to access WordPress from Laravel. Our
 current driver requirement is to be able to read, albeit some drivers may be able to write in the future. We use this

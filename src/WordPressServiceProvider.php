@@ -3,6 +3,7 @@
 namespace Crumbls\WordPress;
 
 use Crumbls\WordPress\Drivers\RestRepository;
+use Crumbls\WordPress\Facades\WordPressFacade;
 use Crumbls\WordPress\Services\WordPress;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\AliasLoader;
@@ -21,25 +22,6 @@ class WordPressServiceProvider extends ServiceProvider
 	 */
     public function boot()
     {
-		return;
-	    /**
-	     * REMOVE THIS.
-	     */
-	    \Illuminate\Support\Facades\Gate::before(function ($user, $ability) {
-			return true;
-	    });
-
-	    $this->bootAbout();
-	    $this->bootCommands();
-	    $this->bootComponents();
-	    $this->bootPublishes();
-	    $this->bootRoutes();
-
-	    $this->loadViewsFrom(__DIR__ . '/../resources/views', 'time');
-	    return;
-
-		return;
-		$this->filament();
     }
 
 	/**
@@ -48,9 +30,8 @@ class WordPressServiceProvider extends ServiceProvider
 	 * @return void
 	 */
 	public function register() : void {
-		$this->app->singleton('wordpress', function ($app) {
-
-			$ret = new WordPress($app);
+		$this->app->bind('wordpress', function()  {
+			$ret = new WordPress(app());
 
 			$ret->extend('wp-json', function ($app) {
 				return new RestRepository($app);
@@ -58,5 +39,9 @@ class WordPressServiceProvider extends ServiceProvider
 
 			return $ret;
 		});
+
+
+		$loader = \Illuminate\Foundation\AliasLoader::getInstance();
+		$loader->alias('WordPress', WordPressFacade::class);
 	}
 }

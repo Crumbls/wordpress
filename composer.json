@@ -1,0 +1,54 @@
+{
+    "name": "crumbls/wordpress",
+    "description": "A tool to help facilitate migrating from WordPress, or at least making it usable in Laravel.",
+    "keywords": [
+        "Crumbls",
+        "WordPress",
+        "wp-json",
+        "Laravel",
+        "Migration",
+        "Custom Post Types"
+    ],
+    "homepage": "https://github.com/crumbls/wordpress",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chase C. Miller",
+            "email": "chase@crumbls.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^9.0|^10.0",
+        "php": "^8.1"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Crumbls\\WordPress\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Crumbls\\WordPress\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Crumbls\\WordPress\\WordPressServiceProvider"
+      ]
+    }
+  }
+}

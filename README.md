@@ -1,7 +1,7 @@
 # Laravel from WordPress
 
-### This package is in very early development and shouldn't be used. 
-### It's only available to collect data on what is left to be completed between a few users.
+### This package is in very early development and shouldn't be used.   More than anything, it's a POC to demonstrate a specific programming pattern.
+### It's only available to collect data on what is left to be completed between a few users. There are almost no comments.
 ### Regular changes will break this as it's just a proof of concept.
 
 The goal of this package is to provide an abstract factory pattern via a manager to access WordPress from Laravel. Our
